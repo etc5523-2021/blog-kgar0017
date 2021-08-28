@@ -12,6 +12,7 @@ library(here)
 library(ggplot2)
 library(sparkline)
 library(DT)
+library(kableExtra)
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE,
@@ -33,7 +34,30 @@ The Blog is using the data collected by [ourworldindata.org](https://ourworldind
 
 The data is available in **csv**, **xlsx**, and **json** format. I wll be working on **csv** format for this blog post.
 
-```{r}
-data <- read_csv(here::here("data/small_trains.csv"))
+```{r read,include=FALSE}
+covid <- read_csv(here::here("data/owid-covid-data.csv"))
+```
+```{r read1,include=FALSE}
+covid_india <- covid %>% 
+  filter(location == "India")
+```
+
+The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_india)`**.
+
+```{r Q1,echo=FALSE}
+covid_india_1 <- covid_india %>% 
+  select(location,date,total_cases,new_cases,new_cases_smoothed,total_deaths,new_deaths,new_deaths_smoothed,new_tests,total_tests,total_vaccinations,people_vaccinated,people_fully_vaccinated,total_boosters,new_vaccinations,new_vaccinations_smoothed,population,population_density,extreme_poverty,cardiovasc_death_rate,diabetes_prevalence,female_smokers,male_smokers,handwashing_facilities,life_expectancy,excess_mortality)
+
+covid_india_1 %>% 
+  select(date,total_cases,new_cases,new_tests,total_tests) %>% 
+  rename("Date" = date,
+         "Total_Cases" = total_cases,
+         "New_Cases" = new_cases,
+         "New_Tests" = new_tests,
+         "Total_Tests" = total_tests) %>% 
+   slice_max(New_Cases,n = 5) %>% 
+  mutate(Perc_New_Cases = round((New_Cases/New_Tests)*100,2)) %>% 
+  kable(caption = "Top 5 dats with max no of covid cases") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
 

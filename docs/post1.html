@@ -2030,6 +2030,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+  <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2091,6 +2093,138 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><strong>Other variables</strong>: This data is collected from a variety of sources (United Nations, World Bank, Global Burden of Disease, Blavatnik School of Government, etc.). More information is available in the <a href="https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv">codebook</a>.</li>
 </ul>
 <p>The data is available in <strong>csv</strong>, <strong>xlsx</strong>, and <strong>json</strong> format. I wll be working on <strong>csv</strong> format for this blog post.</p>
+<p>The main dataset is of dimensions <strong>112442, 62</strong>, whereas that of <strong>India</strong> alone is <strong>576, 62</strong>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:Q1">Table 1: </span>Top 5 dats with max no of covid cases
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:right;">
+Total_Cases
+</th>
+<th style="text-align:right;">
+New_Cases
+</th>
+<th style="text-align:right;">
+New_Tests
+</th>
+<th style="text-align:right;">
+Total_Tests
+</th>
+<th style="text-align:right;">
+Perc_New_Cases
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2021-05-06
+</td>
+<td style="text-align:right;">
+21491598
+</td>
+<td style="text-align:right;">
+414188
+</td>
+<td style="text-align:right;">
+1923131
+</td>
+<td style="text-align:right;">
+296775209
+</td>
+<td style="text-align:right;">
+21.54
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-05-05
+</td>
+<td style="text-align:right;">
+21077410
+</td>
+<td style="text-align:right;">
+412431
+</td>
+<td style="text-align:right;">
+1541299
+</td>
+<td style="text-align:right;">
+294852078
+</td>
+<td style="text-align:right;">
+26.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-05-08
+</td>
+<td style="text-align:right;">
+22296081
+</td>
+<td style="text-align:right;">
+403405
+</td>
+<td style="text-align:right;">
+1808344
+</td>
+<td style="text-align:right;">
+300410043
+</td>
+<td style="text-align:right;">
+22.31
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-04-30
+</td>
+<td style="text-align:right;">
+19164969
+</td>
+<td style="text-align:right;">
+401993
+</td>
+<td style="text-align:right;">
+1920107
+</td>
+<td style="text-align:right;">
+286392086
+</td>
+<td style="text-align:right;">
+20.94
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-05-07
+</td>
+<td style="text-align:right;">
+21892676
+</td>
+<td style="text-align:right;">
+401078
+</td>
+<td style="text-align:right;">
+1826490
+</td>
+<td style="text-align:right;">
+298601699
+</td>
+<td style="text-align:right;">
+21.96
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
