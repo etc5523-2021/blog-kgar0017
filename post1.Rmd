@@ -57,7 +57,53 @@ covid_india_1 %>%
          "Total_Tests" = total_tests) %>% 
    slice_max(New_Cases,n = 5) %>% 
   mutate(Perc_New_Cases = round((New_Cases/New_Tests)*100,2)) %>% 
-  kable(caption = "Top 5 dats with max no of covid cases") %>% 
+  kable(caption = "Top 5 days with max no of covid cases") %>% 
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
 
+```{r Q2A,echo = FALSE}
+sample_row <- covid_india_1 %>% 
+  select(date,total_cases,total_vaccinations,people_vaccinated,people_fully_vaccinated,new_vaccinations) %>% 
+  head(1) %>% 
+  mutate(date = as.Date("2020-01-29"),
+         total_cases = NA)
+
+
+sample_data <- covid_india_1 %>% 
+  select(date,total_cases,total_vaccinations,people_vaccinated,people_fully_vaccinated,new_vaccinations)
+
+sample_data1 <- rbind(sample_row,sample_data)
+
+sample_final <- sample_data1 %>% 
+  filter(date != "2021-08-27") %>% 
+  rename("Date_prev" = date,
+         "Total_Cases_prev" = total_cases,
+         "Total_Doses_prev" = total_vaccinations,
+         "Tot_1st_Dose_prev" = people_vaccinated,
+         "Tot_2nd_Dose_prev" = people_fully_vaccinated,
+         "new_vaccinations_prev" = new_vaccinations)
+
+covid_india_sample <- covid_india_1 %>% 
+  select(date,total_cases,total_vaccinations,people_vaccinated,people_fully_vaccinated,new_vaccinations) %>% 
+  rename("Date" = date,
+         "Total_Cases" = total_cases,
+         "Total_Doses" = total_vaccinations,
+         "Tot_1st_Dose" = people_vaccinated,
+         "Tot_2nd_Dose" = people_fully_vaccinated) 
+  
+
+cbind(covid_india_sample,sample_final) %>% 
+  slice_max(new_vaccinations,n = 5) %>% 
+  mutate(First_Dose = Tot_1st_Dose - Tot_1st_Dose_prev,
+         Second_Dose = Tot_2nd_Dose - Tot_2nd_Dose_prev) %>% 
+  select(Date,Total_Cases,Total_Doses,First_Dose,Second_Dose,new_vaccinations) %>% 
+   mutate(Per_1st_Dose = round(First_Dose/(new_vaccinations)*100,2),
+         Per_2nd_Dose = round((Second_Dose/new_vaccinations)*100,2)) %>% 
+  select(-c(First_Dose,Second_Dose)) %>% 
+  rename(First_Dose = "Per_1st_Dose",
+         Second_Dose = "Per_2nd_Dose") %>% 
+  kable(caption = "Top 5 days with max no of vaccinations done") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
+```
+
+```
