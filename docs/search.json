@@ -6,14 +6,21 @@
       "description": "Some additional details about the blog",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-08-28T10:55:53+05:30"
+      "last_modified": "2021-08-28T12:35:01+05:30"
     },
     {
       "path": "index.html",
       "title": "Blogs by Karan",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-08-28T10:55:22+05:30"
+      "last_modified": "2021-08-28T12:56:18+05:30"
+    },
+    {
+      "path": "post1.html",
+      "title": "India COVID Stats",
+      "author": [],
+      "contents": "\nData Description\n\n\n\n",
+      "last_modified": "2021-08-28T12:56:07+05:30"
     }
   ],
   "collections": ["posts/posts.json"]
