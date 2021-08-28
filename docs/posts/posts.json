@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to My Blog",
+    "description": "Welcome to my new blog, COVID Blogs. I hope you enjoy \nreading what I have to say!",
+    "author": [
+      {
+        "name": "KARAN GARG",
+        "url": "http://linkedin.com/in/karan-garg-66543112b"
+      }
+    ],
+    "date": "2021-08-28",
+    "categories": [],
+    "contents": "\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-08-28T11:04:56+05:30",
+    "input_file": "welcome.knit.md"
+  }
+]
