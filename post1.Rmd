@@ -6,10 +6,9 @@ output:
 ---
 
 
-# Data Description
-
 ```{r ,include=FALSE}
 library(tidyverse)
+library(here)
 library(ggplot2)
 library(sparkline)
 library(DT)
@@ -18,5 +17,23 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE
 )
+```
+
+
+# Data Description
+
+The Blog is using the data collected by [ourworldindata.org](https://ourworldindata.org/coronavirus-source-data) and stored and updated timely in their github repo [here](https://github.com/owid/covid-19-data/tree/master/public/data). The team of **"Our World in Data"** has further collected this data from various sources such as:
+
+* **Confirmed Cases**: This data comes from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19) (JHU)
+*  **Hospitalizations and intensive care unit (ICU) admissions**: our data comes from the [European Centre for Disease Prevention and Control](https://www.ecdc.europa.eu/en/publications-data/download-data-hospital-and-icu-admission-rates-and-current-occupancy-covid-19) (ECDC) for a select number of European countries; and government sources for the [United Kingdom](https://coronavirus.data.gov.uk/details/healthcare), the [United States](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries), [Canada](https://covid19tracker.ca), [Israel](https://datadashboard.health.gov.il/COVID-19/general), [Algeria](https://github.com/yasserkaddour/covid19-icu-data-algeria), and [Switzerland](https://opendata.swiss/fr/dataset/covid-19-schweiz).
+*  **Testing for COVID-19**: This data is collected by the **Our World in Data team** from official reports; you can find further details in our post on COVID-19 testing, including our [checklist of questions to understand testing data](https://ourworldindata.org/coronavirus-testing#our-checklist-for-covid-19-testing-data), information on [geographical and temporal coverage](https://ourworldindata.org/coronavirus-testing#which-countries-do-we-have-testing-data-for), and [detailed country-by-country source information](https://ourworldindata.org/coronavirus-testing#our-checklist-for-covid-19-testing-data). The testing dataset is updated around **twice a week**.
+*  **Vaccinations against COVID-19**: Yhis data is collected by the **Our World in Data team** from official reports.
+*  **Other variables**: This data is collected from a variety of sources (United Nations, World Bank, Global Burden of Disease, Blavatnik School of Government, etc.). More information is available in the [codebook](https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv).
+
+
+The data is available in **csv**, **xlsx**, and **json** format. I wll be working on **csv** format for this blog post.
+
+```{r}
+data <- read_csv(here::here("data/small_trains.csv"))
 ```
 
