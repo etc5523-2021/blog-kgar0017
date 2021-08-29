@@ -348,7 +348,7 @@ graph3 <- cbind(covid_india_sample,sample_final) %>%
                values_to = "Tot_Doses")  %>% 
   ggplot(aes(Month,
              Tot_Doses,
-             group = Doses,,
+             group = Doses,
              color = Doses)) +
   geom_line() +
     scale_x_continuous(breaks = seq(1,12,1)) +
@@ -360,3 +360,8 @@ graph3 <- cbind(covid_india_sample,sample_final) %>%
 ggplotly(graph3)  
 ```
 
+The above figure gives us following insights
+
+*  No vaccinations were done in 2021 ( which is true as vaccine started to be distriuted in **2021**).
+*  In **2021**, we oserve an exponential rise in **1st dose** delivered after **"February"** and a gradual rise in **2nd dose** done, but a sudden dip in vaccinations is seen in period **April-May** for 1st dose and **May-June** for 2nd dose. This maybe duw to global shortage of vaccines.
+*  The vaccine drive saw another quick jump in doses being given im **July,2021** and then again saw a fall.
