@@ -48,6 +48,8 @@ The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** 
 
 # Analysis & Findings
 
+## What are the top 5 days with maximum covid cases reported
+
 ```{r Q1,echo=FALSE}
 covid_india_1 <- covid_india %>% 
   select(location,date,total_cases,new_cases,new_cases_smoothed,total_deaths,new_deaths,new_deaths_smoothed,new_tests,total_tests,total_vaccinations,people_vaccinated,people_fully_vaccinated,total_boosters,new_vaccinations,new_vaccinations_smoothed,population,population_density,extreme_poverty,cardiovasc_death_rate,diabetes_prevalence,female_smokers,male_smokers,handwashing_facilities,life_expectancy,excess_mortality)
@@ -64,6 +66,8 @@ covid_india_1 %>%
   kable(caption = "Top 5 days with max no of covid cases") %>% 
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
+
+## What are top 5 days with maximum covid vaccinations done, also what is the % of 1st and 2nd dose?
 
 ```{r Q2A,echo = FALSE}
 sample_row <- covid_india_1 %>% 
@@ -109,6 +113,7 @@ cbind(covid_india_sample,sample_final) %>%
   kable(caption = "Top 5 days with max no of vaccinations done") %>% 
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
+## Which month in each year saw maximum reporting of new cases ? 
 
 ```{r Q3,echo=FALSE,fig.cap="Trend of total cases in a month each year"}
 graph1 <- covid_india_1 %>% 
@@ -129,9 +134,38 @@ graph1 <- covid_india_1 %>%
   theme_bw()
 ggplotly(graph1)
 ```
+## Exploring the smoothness of new cases in the 2 months having max. reporting of new cases ?
 
+```{r Q4, echo=FALSE}
+covid_india_1 %>% 
+  separate(date, into = c("Year","Month","Day")) %>% 
+  mutate(Year = as.factor(Year),
+         Month = as.numeric(Month)) %>% 
+  filter((Month == 5 & Year == 2021) | (Month == 9 & Year == 2020)) %>% 
+  group_by(Year,Month) %>% 
+  summarise(
+    fivenum = list(setNames(as.vector(summary(na.omit(new_cases_smoothed))),
+                   c("Min", "Q1", "Median", "Mean", "Q3", "Max"))),
+    distribution = spk_chr(new_cases_smoothed, type = "box")) %>% 
+  unnest_wider(fivenum) %>% 
+  datatable(escape = FALSE,
+            options = list(paging = FALSE,
+                           dom = "t",
+                           fnDrawCallback = htmlwidgets::JS(
+  '
+function(){
+  HTMLWidgets.staticRender();
+}
+'
+))) %>% 
+  spk_add_deps() %>% 
+  formatRound(columns = c("Min", "Q1", "Mean", "Median", "Q3", "Max"), digits = 2) 
 
-```{r Q4,echo = FALSE,fig.cap="Trend of total deaths in a month each year"}
+```
+
+## Was deaths reported also found to be maximum in the same months as with max new cases?
+
+```{r Q5,echo = FALSE,fig.cap="Trend of total deaths in a month each year"}
 graph2 <- covid_india_1 %>% 
   separate(date, into = c("Year","Month","Day")) %>% 
   group_by(Year,Month) %>% 
@@ -152,4 +186,7 @@ graph2 <- covid_india_1 %>%
 ggplotly(graph2)
 
 ```
+
+
+
 
