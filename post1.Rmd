@@ -125,7 +125,31 @@ graph1 <- covid_india_1 %>%
   scale_x_continuous(breaks = seq(1,12,1)) +
   geom_point() +
   ylab("Total Monthly Cases") +
-  ggtitle("Trend of monthly Covid Cases per year")
+  ggtitle("Trend of monthly Covid Cases per year") +
+  theme_bw()
 ggplotly(graph1)
+```
+
+
+```{r Q4,echo = FALSE,fig.cap="Trend of total deaths in a month each year"}
+graph2 <- covid_india_1 %>% 
+  separate(date, into = c("Year","Month","Day")) %>% 
+  group_by(Year,Month) %>% 
+  summarise(Mon_new_deaths = sum(new_deaths)) %>% 
+  mutate(Mon_new_deaths = ifelse(is.na(Mon_new_deaths),0,Mon_new_deaths)) %>% 
+  mutate(Year = as.factor(Year),
+         Month = as.numeric(Month)) %>% 
+  ggplot(aes(Month,
+             Mon_new_deaths,
+             geoup = Year,
+             color = Year)) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1,12,1)) +
+  geom_point() +
+  ylab("Total Monthly Deaths") +
+  ggtitle("Trend of monthly deaths per year") +
+  theme_bw()
+ggplotly(graph2)
+
 ```
 
