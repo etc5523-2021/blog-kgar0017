@@ -273,6 +273,11 @@ function(){
 
 ```
 
+The above table illustrates that:
+
+*  In **2020**, the month with max. no of cases has less variability in comparison to the month in **2021** with max. no of cases.
+*  The outlier/extreme values in **2021** were more farther than the **Inter-quartile range**(IQR).
+
 
 ## Was deaths reported also found to be maximum in the same months as with max new cases?
 
