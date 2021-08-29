@@ -103,10 +103,10 @@ covid_india_1 %>%
 
 
 
-The table above tells us that:
+The table **1** & **2** above tells us that:
 
 *  **6th May,2021** reported maximum new covid cases.
-*  **5th MAy,2021** had a more percentage of new cases reported w.r.t new tests done.
+*  **5th May,2021** had a more percentage of new cases reported w.r.t new tests done.
 
 ## What are top 5 days with maximum covid vaccinations done, also what is the % of 1st and 2nd dose?
 
@@ -154,6 +154,48 @@ cbind(covid_india_sample,sample_final) %>%
   kable(caption = "Top 5 days with max no of vaccinations done") %>% 
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
+
+```{r Q2B,echo=FALSE}
+cbind(covid_india_sample,sample_final) %>% 
+  mutate(First_Dose = Tot_1st_Dose - Tot_1st_Dose_prev,
+         Second_Dose = Tot_2nd_Dose - Tot_2nd_Dose_prev) %>% 
+  select(Date,Total_Cases,Total_Doses,First_Dose,Second_Dose,new_vaccinations) %>% 
+   mutate(Per_1st_Dose = round(First_Dose/(new_vaccinations)*100,2),
+         Per_2nd_Dose = round((Second_Dose/new_vaccinations)*100,2)) %>% 
+  select(-c(First_Dose,Second_Dose)) %>% 
+  rename(First_Dose = "Per_1st_Dose",
+         Second_Dose = "Per_2nd_Dose") %>% 
+  slice_max(First_Dose,n = 5) %>% 
+  head(5) %>% 
+  kable(caption = "Top 5 days with max no of !st dose given") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
+
+```
+
+```{r Q2C,echo=FALSE}
+cbind(covid_india_sample,sample_final) %>% 
+  mutate(First_Dose = Tot_1st_Dose - Tot_1st_Dose_prev,
+         Second_Dose = Tot_2nd_Dose - Tot_2nd_Dose_prev) %>% 
+  select(Date,Total_Cases,Total_Doses,First_Dose,Second_Dose,new_vaccinations) %>% 
+   mutate(Per_1st_Dose = round(First_Dose/(new_vaccinations)*100,2),
+         Per_2nd_Dose = round((Second_Dose/new_vaccinations)*100,2)) %>% 
+  select(-c(First_Dose,Second_Dose)) %>% 
+  rename(First_Dose = "Per_1st_Dose",
+         Second_Dose = "Per_2nd_Dose") %>% 
+  slice_max(Second_Dose,n = 5) %>% 
+  kable(caption = "Top 5 days with max no of 2nd dose given") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
+
+```
+
+
+The above tables **3**,**4** & **5** clearly showcases that:
+
+*  On **8th July,2021**, maximum jabs of covid vaccines were given with mostly being that of **1st dose**.
+*  **Table 4** seems to be pretty obvious with its stats that during the the start of vaccination drive, everyone will get 1st dose only.
+*  **Table 5** is more informative as it tells you about those days on which more than **50%** of vaccinations done was of **2nd dose**.
+
+
 ## Which month in each year saw maximum reporting of new cases ? 
 
 ```{r Q3,echo=FALSE,fig.cap="Trend of total cases in a month each year"}
