@@ -20,6 +20,28 @@ knitr::opts_chunk$set(
   warning = FALSE
 )
 ```
+```{css ,echo = FALSE}
+body{
+  background-color: yellow;
+}
+
+h1{
+  color: grey;
+  font-size: 50px;
+}
+
+h2{
+  color: orange;
+  font-size: 25px;
+}
+
+thead {
+  background-color: #006DAE;
+  color: white;
+}
+
+
+```
 
 
 # Data Description
