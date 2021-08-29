@@ -189,4 +189,32 @@ ggplotly(graph2)
 
 
 
+```{r Q6,echo=FALSE,fig.cap="Trend of Vaccinations with classiification of 1st & 2nd Dose"}
+graph3 <- cbind(covid_india_sample,sample_final) %>%
+  mutate(First_Dose = Tot_1st_Dose - Tot_1st_Dose_prev,
+         Second_Dose = Tot_2nd_Dose - Tot_2nd_Dose_prev) %>% 
+   separate(Date, into = c("Year","Month","Day")) %>% 
+  mutate(First_Dose = ifelse(is.na(First_Dose),0,First_Dose),
+         Second_Dose = ifelse(is.na(Second_Dose),0,Second_Dose)) %>% 
+  group_by(Year,Month) %>% 
+  summarise(First_Dose = sum(First_Dose),
+            Second_Dose = sum(Second_Dose)) %>% 
+ mutate(Year = as.factor(Year),
+         Month = as.numeric(Month)) %>% 
+  pivot_longer(cols = c(First_Dose,Second_Dose),
+               names_to = "Doses",
+               values_to = "Tot_Doses")  %>% 
+  ggplot(aes(Month,
+             Tot_Doses,
+             group = Doses,,
+             color = Doses)) +
+  geom_line() +
+    scale_x_continuous(breaks = seq(1,12,1)) +
+  geom_point() +
+  ylab("Total Monthly Vaccinations\n\n") +
+  ggtitle("Trend of Vaccinations done") +
+  theme_bw() +
+  facet_wrap(~Year) 
+ggplotly(graph3)  
+```
 
