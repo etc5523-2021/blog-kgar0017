@@ -239,9 +239,9 @@ ggplotly(graph1)
 
 The above graph depicts following points:
 
-*  In **2020**, the increase in covid cases was pretty much stead and saw a gradual increase after the month **5** and reached to it's peak in **9th month** with a total of **`r case_2020_max$Mon_new_cases`** alone in this month. 
-*  The bove point seems to be pretty true also as India was in full lockdown till the end of **May 2020**, after which we only see a gradual increase in cases.
-*  In **2021**, cases started increasing in **2nd month**, but saw a showcking rise after the **3rd month** (in-time, when the **2nd wave** of covid kicked in) and reach to it's all time high of **`r case_2021_max$Mon_new_cases`** alone in **5th month**, after which t again dropped drastically to almost same to it's total in **2nd month**.
+*  In **2020**, the increase in covid cases was pretty much steady and saw a gradual increase after **May** and reached to it's peak in **September** with a total of **`r case_2020_max$Mon_new_cases`** alone in this month. 
+*  The above point seems to be pretty true also as **India** was in full lockdown till the end of **May,2020**, after which we only see a gradual increase in cases.
+*  In **2021**, cases started increasing after **February**, but saw a showcking rise after the **March** (in-time, when the **2nd wave** of covid kicked in) and reach to it's all time high of **`r case_2021_max$Mon_new_cases`** alone in **May**, after which it again dropped drastically to almost same to it's total in **February**.
 
 
 ## Exploring the smoothness of new cases in the 2 months having max. reporting of new cases ?
@@ -282,6 +282,27 @@ The above table illustrates that:
 ## Was deaths reported also found to be maximum in the same months as with max new cases?
 
 ```{r Q5,echo = FALSE,fig.cap="Trend of total deaths in a month each year"}
+death_2020_max <- covid_india_1 %>% 
+  separate(date, into = c("Year","Month","Day")) %>% 
+  group_by(Year,Month) %>% 
+  summarise(Mon_new_deaths = sum(new_deaths)) %>% 
+  mutate(Mon_new_deaths = ifelse(is.na(Mon_new_deaths),0,Mon_new_deaths)) %>% 
+  mutate(Year = as.factor(Year),
+         Month = as.numeric(Month)) %>% 
+  filter(Year == 2020) %>% 
+  slice_max(Mon_new_deaths,n = 1)
+
+death_2021_max <- covid_india_1 %>% 
+  separate(date, into = c("Year","Month","Day")) %>% 
+  group_by(Year,Month) %>% 
+  summarise(Mon_new_deaths = sum(new_deaths)) %>% 
+  mutate(Mon_new_deaths = ifelse(is.na(Mon_new_deaths),0,Mon_new_deaths)) %>% 
+  mutate(Year = as.factor(Year),
+         Month = as.numeric(Month)) %>% 
+  filter(Year == 2021) %>% 
+  slice_max(Mon_new_deaths,n = 1)
+
+
 graph2 <- covid_india_1 %>% 
   separate(date, into = c("Year","Month","Day")) %>% 
   group_by(Year,Month) %>% 
@@ -304,6 +325,11 @@ ggplotly(graph2)
 ```
 
 
+The above figure illustrates the following points:
+
+*  Max. deaths were recorded in the same month in which max. covid cases were recorded for both **2020** & **2021**.
+*  In **2020**, max deaths **`r death_2020_max$Mon_new_deaths`** were recordrd in **September**.
+*  In **2021**, max deaths **`r death_2021_max$Mon_new_deaths`** were recordrd in **May**.
 
 ```{r Q6,echo=FALSE,fig.cap="Trend of Vaccinations with classiification of 1st & 2nd Dose"}
 graph3 <- cbind(covid_india_sample,sample_final) %>%
