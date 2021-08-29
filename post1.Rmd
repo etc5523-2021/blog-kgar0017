@@ -21,9 +21,6 @@ knitr::opts_chunk$set(
 )
 ```
 ```{css ,echo = FALSE}
-body{
-  background-color: yellow;
-}
 
 h1{
   color: grey;
@@ -31,8 +28,8 @@ h1{
 }
 
 h2{
-  color: orange;
-  font-size: 25px;
+  color: red;
+  font-size: 20px;
 }
 
 thead {
@@ -72,7 +69,7 @@ The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** 
 
 ## What are the top 5 days with maximum covid cases reported
 
-```{r Q1,echo=FALSE}
+```{r Q1A,echo=FALSE}
 covid_india_1 <- covid_india %>% 
   select(location,date,total_cases,new_cases,new_cases_smoothed,total_deaths,new_deaths,new_deaths_smoothed,new_tests,total_tests,total_vaccinations,people_vaccinated,people_fully_vaccinated,total_boosters,new_vaccinations,new_vaccinations_smoothed,population,population_density,extreme_poverty,cardiovasc_death_rate,diabetes_prevalence,female_smokers,male_smokers,handwashing_facilities,life_expectancy,excess_mortality)
 
@@ -88,6 +85,28 @@ covid_india_1 %>%
   kable(caption = "Top 5 days with max no of covid cases") %>% 
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
+
+```{r Q1B,echo=FALSE}
+covid_india_1 %>% 
+  select(date,total_cases,new_cases,new_tests,total_tests) %>% 
+  rename("Date" = date,
+         "Total_Cases" = total_cases,
+         "New_Cases" = new_cases,
+         "New_Tests" = new_tests,
+         "Total_Tests" = total_tests) %>% 
+  mutate(Perc_New_Cases = round((New_Cases/New_Tests)*100,2)) %>% 
+  slice_max(Perc_New_Cases,n = 5) %>% 
+  kable(caption = "Top 5 days with max percetage of new covid cases") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
+
+```
+
+
+
+The table above tells us that:
+
+*  **6th May,2021** reported maximum new covid cases.
+*  **5th MAy,2021** had a more percentage of new cases reported w.r.t new tests done.
 
 ## What are top 5 days with maximum covid vaccinations done, also what is the % of 1st and 2nd dose?
 
