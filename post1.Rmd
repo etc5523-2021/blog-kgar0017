@@ -64,6 +64,7 @@ covid_india <- covid %>%
 
 The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_india)`**.
 
+**NOTE**: The data is upto date **`r covid_india %>% tail(1) %>% select(date)`**.
 
 # Analysis & Findings
 
