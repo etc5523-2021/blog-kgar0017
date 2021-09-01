@@ -23,12 +23,12 @@ knitr::opts_chunk$set(
 ```{css ,echo = FALSE}
 
 h1{
-  color: grey;
+  color: red;
   font-size: 50px;
 }
 
 h2{
-  color: red;
+  color: grey;
   font-size: 20px;
 }
 
@@ -45,8 +45,8 @@ thead {
 
 The Blog is using the data collected by [ourworldindata.org](https://ourworldindata.org/coronavirus-source-data) and stored and updated timely in their github repo [here](https://github.com/owid/covid-19-data/tree/master/public/data). The team of **"Our World in Data"** has further collected this data from various sources such as:
 
-* **Confirmed Cases**: This data comes from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19) (JHU)
-*  **Hospitalizations and intensive care unit (ICU) admissions**: our data comes from the [European Centre for Disease Prevention and Control](https://www.ecdc.europa.eu/en/publications-data/download-data-hospital-and-icu-admission-rates-and-current-occupancy-covid-19) (ECDC) for a select number of European countries; and government sources for the [United Kingdom](https://coronavirus.data.gov.uk/details/healthcare), the [United States](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries), [Canada](https://covid19tracker.ca), [Israel](https://datadashboard.health.gov.il/COVID-19/general), [Algeria](https://github.com/yasserkaddour/covid19-icu-data-algeria), and [Switzerland](https://opendata.swiss/fr/dataset/covid-19-schweiz).
+* **Confirmed Cases**: This data comes from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19) (JHU).
+*  **Hospitalizations and intensive care unit (ICU) admissions**: Our data comes from the [European Centre for Disease Prevention and Control](https://www.ecdc.europa.eu/en/publications-data/download-data-hospital-and-icu-admission-rates-and-current-occupancy-covid-19) (ECDC) for a select number of European countries; and government sources for the [United Kingdom](https://coronavirus.data.gov.uk/details/healthcare), the [United States](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries), [Canada](https://covid19tracker.ca), [Israel](https://datadashboard.health.gov.il/COVID-19/general), [Algeria](https://github.com/yasserkaddour/covid19-icu-data-algeria), and [Switzerland](https://opendata.swiss/fr/dataset/covid-19-schweiz).
 *  **Testing for COVID-19**: This data is collected by the **Our World in Data team** from official reports; you can find further details in our post on COVID-19 testing, including our [checklist of questions to understand testing data](https://ourworldindata.org/coronavirus-testing#our-checklist-for-covid-19-testing-data), information on [geographical and temporal coverage](https://ourworldindata.org/coronavirus-testing#which-countries-do-we-have-testing-data-for), and [detailed country-by-country source information](https://ourworldindata.org/coronavirus-testing#our-checklist-for-covid-19-testing-data). The testing dataset is updated around **twice a week**.
 *  **Vaccinations against COVID-19**: This data is collected by the **Our World in Data team** from official reports.
 *  **Other variables**: This data is collected from a variety of sources (United Nations, World Bank, Global Burden of Disease, Blavatnik School of Government, etc.). More information is available in the [codebook](https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv).
@@ -62,7 +62,7 @@ covid_india <- covid %>%
   filter(location == "India")
 ```
 
-The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_indie)`**.
+The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_india)`**.
 
 
 # Analysis & Findings
@@ -244,7 +244,7 @@ The above graph depicts following points:
 *  In **2021**, cases started increasing after **February**, but saw a shocking rise after the **March** (in-time, when the **2nd wave** of covid kicked in) and reach to it's all time high of **`r case_2021_max$Mon_new_cases`** alone in **May**, after which it again dropped drastically to almost same to it's total in **February**.
 
 
-## Exploring the smoothness of new cases in the 2 months having max. reporting of new cases ?
+## Exploring the smoothness of new cases in the 2 months having max. reporting of new cases
 
 ```{r Q4, echo=FALSE}
 covid_india_1 %>% 
@@ -279,7 +279,7 @@ The above table illustrates that:
 *  The outlier/extreme values in **2021** were more farther than the **Inter-quartile range**(IQR).
 
 
-## Was deaths reported also found to be maximum in the same months as with max new cases?
+## Were death reports also found to be maximum in the same months as with max new cases?
 
 ```{r Q5,echo = FALSE,fig.cap="Trend of total deaths in a month each year"}
 death_2020_max <- covid_india_1 %>% 
@@ -360,7 +360,7 @@ graph3 <- cbind(covid_india_sample,sample_final) %>%
 ggplotly(graph3)  
 ```
 
-The above figure gives us following insights
+The above figure gives us following insights:
 
 *  No vaccinations were done in 2021 ( which is true as vaccine started to be distributed in **2021**).
 *  In **2021**, we observe an exponential rise in **1st dose** delivered after **"February"** and a gradual rise in **2nd dose** done, but a sudden dip in vaccinations is seen in period **April-May** for 1st dose and **May-June** for 2nd dose. This maybe due to global shortage of vaccines.
