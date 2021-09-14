@@ -52,7 +52,7 @@ The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** 
 
 # Analysis & Findings
 
-##  Data Story 1
+## What are the top 5 days with maximum covid cases reported
 
 ```{r Q1A,echo=FALSE}
 covid_bahrain_1 <- covid_bahrain %>% 
@@ -84,5 +84,41 @@ covid_bahrain_1 %>%
   slice_max(Perc_New_Cases,n = 5) %>% 
   kable(caption = "Top 5 days with max percetage of new covid cases in Bahrain") %>% 
   kable_styling(bootstrap_options = c("basic","striped,hover"))
+```
+
+## What are top 5 days with maximum covid vaccinations done ?
+
+```{r}
+covid_bahrain_1 %>% 
+  select(date,total_vaccinations,new_cases,new_vaccinations) %>% 
+  slice_max(new_vaccinations,n = 5) %>% 
+  kable(caption = "Top 5 days with max covid vaccinations done") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
+```
+
+## What are top 5 days with maximum deaths due to covid ?
+
+```{r}
+covid_bahrain_1 %>% 
+  select(date,total_deaths,new_cases,new_deaths) %>% 
+  slice_max(new_deaths,n = 5) %>% 
+  kable(caption = "Ttop 5 days with maximum deaths due to covid") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
+```
+
+
 
 ```
+
+
+
+
+
+
+
+
+
+
+```
+
+
