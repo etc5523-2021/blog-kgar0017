@@ -12,7 +12,9 @@ library(ggplot2)
 library(sparkline)
 library(DT)
 library(kableExtra)
+library(gghighlight)
 library(plotly)
+library (patchwork) 
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE,
@@ -48,6 +50,20 @@ covid_bahrain <- covid %>%
  filter(location == "Bahrain")
 ```
 
+```{r read2,include=FALSE}
+covid_bahrain_1 <- covid_bahrain %>% 
+  select(location,date,total_cases,new_cases,new_cases_smoothed,total_deaths,new_deaths,new_deaths_smoothed,new_tests,total_tests,total_vaccinations,people_vaccinated,people_fully_vaccinated,total_boosters,new_vaccinations,new_vaccinations_smoothed,population,population_density,extreme_poverty,cardiovasc_death_rate,diabetes_prevalence,female_smokers,male_smokers,handwashing_facilities,life_expectancy,excess_mortality)
+
+covid_asia <- covid %>% 
+  filter(continent == "Asia") %>% 
+    select(location,date,total_cases,new_cases,new_cases_smoothed,total_deaths,new_deaths,new_deaths_smoothed,new_tests,total_tests,total_vaccinations,people_vaccinated,people_fully_vaccinated,total_boosters,new_vaccinations,new_vaccinations_smoothed,population,population_density,extreme_poverty,cardiovasc_death_rate,diabetes_prevalence,female_smokers,male_smokers,handwashing_facilities,life_expectancy,excess_mortality)
+
+
+
+```
+
+
+
 The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_bahrain)`**.
 
 # Analysis & Findings
@@ -55,8 +71,7 @@ The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** 
 ## What are the top 5 days with maximum covid cases reported
 
 ```{r Q1A,echo=FALSE}
-covid_bahrain_1 <- covid_bahrain %>% 
-  select(location,date,total_cases,new_cases,new_cases_smoothed,total_deaths,new_deaths,new_deaths_smoothed,new_tests,total_tests,total_vaccinations,people_vaccinated,people_fully_vaccinated,total_boosters,new_vaccinations,new_vaccinations_smoothed,population,population_density,extreme_poverty,cardiovasc_death_rate,diabetes_prevalence,female_smokers,male_smokers,handwashing_facilities,life_expectancy,excess_mortality)
+
 
 covid_bahrain_1 %>% 
   select(date,total_cases,new_cases,new_tests,total_tests) %>% 
@@ -105,6 +120,37 @@ covid_bahrain_1 %>%
   kable(caption = "Ttop 5 days with maximum deaths due to covid") %>% 
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
+# Data Story 1 (Wihthin Continent)
+
+```{r}
+covid_asia_loc <- covid_asia %>% 
+  filter(date == "2021-09-12") %>% 
+  slice_max(total_cases,n=5) %>% 
+  select(location)
+
+covid_asia_loc1 <- covid_asia_loc$location
+
+graph1 <- covid_asia %>% 
+  filter(location == "Bahrain" | location %in% covid_asia_loc1) %>% 
+  separate(date, into = c("Year","Month","Day")) %>% 
+  group_by(location,Year,Month) %>% 
+  summarise(Mon_new_cases = sum(new_cases)) %>% 
+  mutate(Year = as.factor(Year),
+         Month = as.numeric(Month)) %>% 
+  ggplot(aes(Month,
+             Mon_new_cases,
+             color = location)) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1,12,1)) +
+  geom_point() +
+  ylab("Total Monthly Cases") +
+  ggtitle("Trend of monthly Covid Cases per year") +
+  theme_bw() +
+#   gghighlight(location == "Bahrain" | location %in% covid_asia_loc1) +
+  facet_wrap(~Year) 
+ggplotly(graph1)
+
+
 
 
 
