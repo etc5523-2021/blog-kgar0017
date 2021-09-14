@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE
 )
+options(scipen = 1e6)
 ```
 ```{css ,echo = FALSE}
 
