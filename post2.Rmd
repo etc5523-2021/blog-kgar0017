@@ -1,5 +1,5 @@
 ---
-title: "Egypt COVID Stats"
+title: "Bahrain COVID Stats"
 output:
   distill::distill_article:
     self_contained: false
@@ -20,12 +20,69 @@ knitr::opts_chunk$set(
 )
 options(scipen = 1e6)
 ```
+```{css ,echo = FALSE}
+
+h1{
+  color: red;
+  font-size: 50px;
+}
+
+h2{
+  color: grey;
+  font-size: 20px;
+}
+
+thead {
+  background-color: #006DAE;
+  color: white;
+}
+
+
+```
 
 ```{r read,include=FALSE}
-covid <- read_csv(here::here("data/egypt-covid-data.csv"))
+covid <- read_csv(here::here("data/bahrain-covid-data.csv"))
 ```
 ```{r read1,include=FALSE}
-covid_egypt <- covid %>% 
-  filter(location == "Egypt")
+covid_bahrain <- covid %>% 
+ filter(location == "Bahrain")
 ```
-The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_egypt)`**.
+
+The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_bahrain)`**.
+
+# Analysis & Findings
+
+##  Data Story 1
+
+```{r Q1A,echo=FALSE}
+covid_bahrain_1 <- covid_bahrain %>% 
+  select(location,date,total_cases,new_cases,new_cases_smoothed,total_deaths,new_deaths,new_deaths_smoothed,new_tests,total_tests,total_vaccinations,people_vaccinated,people_fully_vaccinated,total_boosters,new_vaccinations,new_vaccinations_smoothed,population,population_density,extreme_poverty,cardiovasc_death_rate,diabetes_prevalence,female_smokers,male_smokers,handwashing_facilities,life_expectancy,excess_mortality)
+
+covid_bahrain_1 %>% 
+  select(date,total_cases,new_cases,new_tests,total_tests) %>% 
+  rename("Date" = date,
+         "Total_Cases" = total_cases,
+         "New_Cases" = new_cases,
+         "New_Tests" = new_tests,
+         "Total_Tests" = total_tests) %>% 
+   slice_max(New_Cases,n = 5) %>% 
+  mutate(Perc_New_Cases = round((New_Cases/New_Tests)*100,2)) %>% 
+  kable(caption = "Top 5 days with max no of covid cases in Bahrain") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
+```
+
+
+```{r Q1B,echo=FALSE}
+covid_bahrain_1 %>% 
+  select(date,total_cases,new_cases,new_tests,total_tests) %>% 
+  rename("Date" = date,
+         "Total_Cases" = total_cases,
+         "New_Cases" = new_cases,
+         "New_Tests" = new_tests,
+         "Total_Tests" = total_tests) %>% 
+  mutate(Perc_New_Cases = round((New_Cases/New_Tests)*100,2)) %>% 
+  slice_max(Perc_New_Cases,n = 5) %>% 
+  kable(caption = "Top 5 days with max percetage of new covid cases in Bahrain") %>% 
+  kable_styling(bootstrap_options = c("basic","striped,hover"))
+
+```

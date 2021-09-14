@@ -24,10 +24,10 @@
     },
     {
       "path": "post2.html",
-      "title": "Egypt COVID Stats",
+      "title": "Bahrain COVID Stats",
       "author": [],
-      "contents": "\nThe main dataset is of dimensions 116345, 62, whereas that of India alone is 577, 62.\n\n\n\n",
-      "last_modified": "2021-09-14T10:10:46+05:30"
+      "contents": "\n\n\n\nh1{\n  color: red;\n  font-size: 50px;\n}\n\nh2{\n  color: grey;\n  font-size: 20px;\n}\n\nthead {\n  background-color: #006DAE;\n  color: white;\n}\n\n\n\nThe main dataset is of dimensions 116345, 62, whereas that of India alone is 567, 62.\nAnalysis & Findings\nData Story 1\n\n\nTable 1: Top 5 days with max no of covid cases in Bahrain\n\n\nDate\n\n\nTotal_Cases\n\n\nNew_Cases\n\n\nNew_Tests\n\n\nTotal_Tests\n\n\nPerc_New_Cases\n\n\n2021-05-29\n\n\n235698\n\n\n3273\n\n\n20310\n\n\n4589012\n\n\n16.12\n\n\n2021-05-23\n\n\n218047\n\n\n3177\n\n\n17679\n\n\n4468716\n\n\n17.97\n\n\n2021-05-27\n\n\n229468\n\n\n3052\n\n\n19163\n\n\n4548243\n\n\n15.93\n\n\n2021-05-28\n\n\n232425\n\n\n2957\n\n\n20459\n\n\n4568702\n\n\n14.45\n\n\n2021-05-21\n\n\n212151\n\n\n2858\n\n\n19847\n\n\n4432836\n\n\n14.40\n\n\n\n\nTable 2: Top 5 days with max percetage of new covid cases in Bahrain\n\n\nDate\n\n\nTotal_Cases\n\n\nNew_Cases\n\n\nNew_Tests\n\n\nTotal_Tests\n\n\nPerc_New_Cases\n\n\n2020-03-11\n\n\n195\n\n\n85\n\n\n456\n\n\n8810\n\n\n18.64\n\n\n2021-05-23\n\n\n218047\n\n\n3177\n\n\n17679\n\n\n4468716\n\n\n17.97\n\n\n2021-05-29\n\n\n235698\n\n\n3273\n\n\n20310\n\n\n4589012\n\n\n16.12\n\n\n2021-05-27\n\n\n229468\n\n\n3052\n\n\n19163\n\n\n4548243\n\n\n15.93\n\n\n2021-05-22\n\n\n214870\n\n\n2719\n\n\n18201\n\n\n4451037\n\n\n14.94\n\n\n\n\n\n",
+      "last_modified": "2021-09-14T14:42:57+05:30"
     }
   ],
   "collections": ["posts/posts.json"]
