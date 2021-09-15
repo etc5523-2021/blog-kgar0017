@@ -125,6 +125,7 @@ sample_data <- covid_india_1 %>%
 
 sample_data1 <- rbind(sample_row,sample_data)
 
+
 sample_final <- sample_data1 %>% 
   filter(date != "2021-08-27") %>% 
   rename("Date_prev" = date,

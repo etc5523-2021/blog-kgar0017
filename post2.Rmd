@@ -263,3 +263,56 @@ ggplotly(graph4)
 ```
 
 
+```{r plt7}
+
+covid_2020 <- covid %>% 
+  separate(date, into = c("Year","Month","Day")) %>%
+  filter(Year == "2020") %>% 
+   mutate(new_cases = ifelse(is.na(new_cases),0,new_cases)) %>% 
+   group_by(iso_code,location,Month) %>% 
+    summarise(Mon_new_cases = sum(new_cases)) %>% 
+  rename("covid_2020" = Mon_new_cases)
+
+covid_df_2020 <- covid_2020 %>% 
+  inner_join(maps::iso3166, by = c(iso_code = "a3"))
+
+breaks <- pretty(covid_2020$covid_2020)
+
+covid_graph_2020 <- 
+  plot_geo(covid_df_2020,
+           frame = ~Month) %>% 
+  add_trace(locations = ~iso_code,
+            z = ~covid_2020,
+            color = covid_2020) %>% 
+  layout(title = "Percentage of increase lobal Covid, 1990-2020")
+covid_graph_2020
+```
+
+```{r plt8}
+
+covid_2021 <- covid %>% 
+  separate(date, into = c("Year","Month","Day")) %>%
+  filter(Year == "2021") %>% 
+   mutate(new_cases = ifelse(is.na(new_cases),0,new_cases)) %>% 
+   group_by(iso_code,location,Month) %>% 
+    summarise(Mon_new_cases = sum(new_cases)) %>% 
+  rename("covid_2021" = Mon_new_cases)
+
+covid_df <- covid_2021 %>% 
+  inner_join(maps::iso3166, by = c(iso_code = "a3"))
+
+breaks <- pretty(covid_2021$covid_2021)
+
+covid_graph_2021 <- 
+  plot_geo(covid_df,
+           frame = ~Month) %>% 
+  add_trace(locations = ~iso_code,
+            z = ~covid_2021,
+            color = covid_2021) %>% 
+  layout(title = "Percentage of increase lobal Covid, 1990-2020")
+covid_graph_2021
+```
+
+
+
+
