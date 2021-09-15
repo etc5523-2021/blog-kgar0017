@@ -63,7 +63,6 @@ covid_asia <- covid %>%
 ```
 
 
-
 The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_bahrain)`**.
 
 # Analysis & Findings
@@ -71,8 +70,6 @@ The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** 
 ## What are the top 5 days with maximum covid cases reported
 
 ```{r Q1A,echo=FALSE}
-
-
 covid_bahrain_1 %>% 
   select(date,total_cases,new_cases,new_tests,total_tests) %>% 
   rename("Date" = date,
@@ -101,6 +98,11 @@ covid_bahrain_1 %>%
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
 
+The table **1** & **2** above tells us that:
+
+*  **29th May,2021** reported maximum new covid cases.
+*  **11th March,2020** had a more percentage of new cases reported w.r.t new tests done.
+
 ## What are top 5 days with maximum covid vaccinations done ?
 
 ```{r}
@@ -120,6 +122,12 @@ covid_bahrain_1 %>%
   kable(caption = "Ttop 5 days with maximum deaths due to covid") %>% 
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
+
+The table **3** above tells us that:
+
+*  **28th june,2021** recorded maximum nnumber of vaccination done across the country.
+
+
 # Data Story 1 (Wihthin Continent)
 
 ```{r read3,include=FALSE}
@@ -264,7 +272,6 @@ ggplotly(graph4)
 
 
 ```{r plt7}
-
 covid_2020 <- covid %>% 
   separate(date, into = c("Year","Month","Day")) %>%
   filter(Year == "2020") %>% 
@@ -284,7 +291,7 @@ covid_graph_2020 <-
   add_trace(locations = ~iso_code,
             z = ~covid_2020,
             color = covid_2020) %>% 
-  layout(title = "Percentage of increase lobal Covid, 1990-2020")
+  layout(title = "Trend of Covid Cases worldwide,2020")
 covid_graph_2020
 ```
 
@@ -309,7 +316,7 @@ covid_graph_2021 <-
   add_trace(locations = ~iso_code,
             z = ~covid_2021,
             color = covid_2021) %>% 
-  layout(title = "Percentage of increase lobal Covid, 1990-2020")
+  layout(title = "Trend of Covid Cases worldwide,2021")
 covid_graph_2021
 ```
 
