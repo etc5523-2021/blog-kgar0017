@@ -125,11 +125,11 @@ covid_bahrain_1 %>%
 
 The table **3** above tells us that:
 
-*  **28th june,2021** recorded maximum nnumber of vaccination done across the country.
+*  **28th june,2021** recorded maximum number of vaccination done across the country.
 
 # Data Story 1 
 
-This data story focus on the covid cases and deaths that occured due to it in **Bahrain**, with respect to the continent it is in which is **Asia**.
+This data story focus on the covid cases and deaths that occurred due to it in **Bahrain**, with respect to the continent it is in which is **Asia**.
 
 ```{r read3,include=FALSE}
 covid_asia_loc <- covid_asia %>% 
@@ -154,7 +154,7 @@ covid_asia %>%
 The above plot **1** , showcases the top **5** countries in **Asia** with covid cases and then compare them to the cases in **Bahrain**.
 
 * **India** topped with maximum cases.
-* Suprisingly **China** doesn't show up in this stats even being the world's populous country.( refer [here](https://covid19.who.int/region/wpro/country/cn))
+* Surprisingly **China** doesn't show up in this stats even being the world's populous country.( refer [here](https://covid19.who.int/region/wpro/country/cn))
 
 ```{r plt1}
 graph1 <- covid_asia %>% 
@@ -211,15 +211,15 @@ The above plot highlights on the trend of deaths due to covid per year in top **
 
 * **Bahrain** shows the similar trend as to with covid cases found in **plot 2**.
 *  In **2020**, **Iran** saw a spike in deaths in **November**, kind of predictable as the cases to increased in this month.
-*  In **2021**, deaths in **Turkey** was again in line with the month in which mmximum covid cases were recorded for it.
+*  In **2021**, deaths in **Turkey** was again in line with the month in which maximum covid cases were recorded for it.
 *  In **2021**,**Indonesia** came out of a surprise, even though the cases decreased in **August** but the death toll jumped up.
 
 
-You can check out on deeper insight on how Idia went through Covid [here](https://etc5523-2021.github.io/blog-kgar0017/post1.html)
+You can check out on deeper insight on how India went through Covid [here](https://etc5523-2021.github.io/blog-kgar0017/post1.html)
 
 # Data Story 2
 
-This data story focus on the covid cases and deaths that occured due to it in **Bahrain**, with respect to country with maximum cases in each conntinent.
+This data story focus on the covid cases and deaths that occurred due to it in **Bahrain**, with respect to country with maximum cases in each continent.
 
 ```{r read4,include=FALSE}
 covid_cont_loc <- covid %>% 
@@ -245,8 +245,8 @@ covid %>%
 ```
 The above plot showcase the countries with maximum covid cases in each continent and compare them to **Bahrain**.
 
-*  Suprisingly, **United States** recorded more cases than **India** even being less populated.
-*  **Bahrain**, this time when compared across continents tuened out to have shift its place from least cases recorded to second least with **Australia** recording the least Covid cases across the continent wise comparison.
+*  Surprisingly, **United States** recorded more cases than **India** even being less populated.
+*  **Bahrain**, this time when compared across continents turned out to have shift its place from least cases recorded to second least with **Australia** recording the least Covid cases across the continent wise comparison.
 
 ```{r plt5}
 graph3 <- covid %>% 
@@ -272,10 +272,10 @@ ggplotly(graph3)
 
 The above plot showcases the trend of monthly covid cases recorded across the countries with max. case till date in each continent. Following points can be deduced from the above:
 
-*  Bahrain as showed the same trend for both years as mentioned above, but it recorded least cxases only in **March,2021**.
-*  After **March,2021**, it Australia who took the seat of having the least coses and remained constant till **June,2021**,
-* It is only after **June,2021**, when an outbreak happened in Australia, cases shoot up and Bahrain was back to the least recorded for the folowwig months.
-*  **India** and **US** were pretty much neck-to-neck in cases recorded upto **October,2020**, after that cases in US saw whopping jump and remained same for **3 months**. Soon after **January,2021**, fall in cases recorded was observed and on other hand, India went to its peak of coviid cases recorded in **May,2021**. 
+*  Bahrain as showed the same trend for both years as mentioned above, but it recorded least cases only in **March,2021**.
+*  After **March,2021**, it Australia who took the seat of having the least cases and remained constant till **June,2021**,
+* It is only after **June,2021**, when an outbreak happened in Australia, cases shoot up and Bahrain was back to the least recorded for the following months.
+*  **India** and **US** were pretty much neck-to-neck in cases recorded upto **October,2020**, after that cases in US saw whopping jump and remained same for **3 months**. Soon after **January,2021**, fall in cases recorded was observed and on other hand, India went to its peak of covid cases recorded in **May,2021**. 
 
 ```{r plt6}
 graph4 <- covid %>% 
@@ -302,7 +302,9 @@ ggplotly(graph4)
 The above plot showcases the trend of monthly deaths due to covid recorded across the countries with max. case till date in each continent. Following points can be deduced from the above:
 
 *  In **2020**, **US** was mostly leading on death rates.
-*  In **2021**, though India recorded most in a month, but overall it brazil who jumped to its peak in **April** similar to India but the fall in cases was gradual unlike which drastically dropped in cases eiing recorded.
+*  In **2021**, though India recorded most in a month, but overall it brazil who jumped to its peak in **April** similar to India but the fall in cases was gradual unlike which drastically dropped in cases being recorded.
+
+#  Geospatial View of Monthly covid cases recorded across the globe
 
 ```{r plt7}
 covid_2020 <- covid %>% 
