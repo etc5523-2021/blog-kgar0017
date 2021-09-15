@@ -167,31 +167,6 @@ graph1 <- covid_asia %>%
 ggplotly(graph1)
 ```
 
-
-
-```{r plt2}
-graph1 <- covid_asia %>% 
-  filter(location == "Bahrain" | location %in% covid_asia_loc1) %>% 
-  separate(date, into = c("Year","Month","Day")) %>% 
-  group_by(location,Year,Month) %>% 
-  summarise(Mon_new_cases = sum(new_cases)) %>% 
-  mutate(Year = as.factor(Year),
-         Month = as.numeric(Month)) %>% 
-  ggplot(aes(Month,
-             Mon_new_cases,
-             color = location)) +
-  geom_line() +
-  scale_x_continuous(breaks = seq(1,12,1)) +
-  geom_point() +
-  ylab("Total Monthly Cases") +
-  ggtitle("Trend of monthly Covid Cases within continent per year") +
-  theme_bw() +
-#   gghighlight(location == "Bahrain" | location %in% covid_asia_loc1) +
-  facet_wrap(~Year) 
-ggplotly(graph1)
-```
-
-
 ```{r}
 graph2 <- covid_asia %>% 
   filter(location == "Bahrain" | location %in% covid_asia_loc1) %>% 
@@ -215,9 +190,76 @@ ggplotly(graph2)
 ```
 
 
+# Data Story 2(Betwee continents)
+
+```{r read4,include=FALSE}
+covid_cont_loc <- covid %>% 
+  filter(date  == "2021-09-12") %>% 
+  group_by(continent) %>% 
+  slice_max(total_cases,n = 1) %>% 
+  head(6) %>% 
+  select(location)
 
 
+covid_cont_loc1 <- covid_cont_loc$location
+```
 
+```{r plt4}
+covid %>% 
+   filter((location == "Bahrain" | location %in% covid_cont_loc1) & date == "2021-09-12") %>% 
+  ggplot(aes(reorder(location,total_cases),
+             total_cases,
+             fill = "yellow")) +
+  geom_col() +
+  geom_label(aes(label = total_cases)) +
+  theme(legend.position = "none")
+```
+
+
+```{r plt5}
+
+graph3 <- covid %>% 
+  filter(location == "Bahrain" | location %in% covid_cont_loc1) %>% 
+  separate(date, into = c("Year","Month","Day")) %>% 
+  group_by(location,Year,Month) %>% 
+  summarise(Mon_new_cases = sum(new_cases)) %>% 
+  mutate(Year = as.factor(Year),
+         Month = as.numeric(Month)) %>% 
+  ggplot(aes(Month,
+             Mon_new_cases,
+             color = location)) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1,12,1)) +
+  geom_point() +
+  ylab("Total Monthly Cases") +
+  ggtitle("Trend of monthly Covid Cases per year") +
+  theme_bw() +
+#   gghighlight(location == "Bahrain" | location %in% covid_asia_loc1) +
+  facet_wrap(~Year) 
+ggplotly(graph3)
+```
+
+
+```{r plt6}
+graph4 <- covid %>% 
+  filter(location == "Bahrain" | location %in% covid_cont_loc1) %>% 
+  separate(date, into = c("Year","Month","Day")) %>% 
+  group_by(location,Year,Month) %>% 
+  summarise(Mon_new_deaths = sum(new_deaths)) %>% 
+  mutate(Year = as.factor(Year),
+         Month = as.numeric(Month)) %>% 
+  ggplot(aes(Month,
+             Mon_new_deaths,
+             color = location)) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1,12,1)) +
+  geom_point() +
+  ylab("Total Monthly Cases") +
+  ggtitle("Trend of monthly Covid Deaths within continent per year") +
+  theme_bw() +
+#   gghighlight(location == "Bahrain" | location %in% covid_asia_loc1) +
+  facet_wrap(~Year) 
+ggplotly(graph4)
 ```
 
 
