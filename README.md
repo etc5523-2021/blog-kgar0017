@@ -10,7 +10,7 @@ This assessment is due Fri Sep 3 2021 11.55PM AEST.
 
 My selected country is India.
 
-The relevant blog post for this assessment is in [FILL].html
+The relevant blog post for this assessment is in [post1].html
 
 - [ ] Selected a country
 - [ ] Website with R markdown 
@@ -24,11 +24,14 @@ The relevant blog post for this assessment is in [FILL].html
 
 ## Blog Post 2
 
+This is the blog of India Covid Stats.
+The URL of this blog is https://etc5523-2021.github.io/blog-kgar0017/post2.html.
+
 This assessment is due Fri Sep 17 2021 11.55PM AEST.
 
-My selected country is [FILL].
+My selected country is [Bahrain].
 
-The relevant blog post for this assessment is in [FILL].html
+The relevant blog post for this assessment is in [post2].html
 
 - [ ] Selected a new country
 - [ ] Data Story 1
