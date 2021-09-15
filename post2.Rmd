@@ -3,6 +3,9 @@ title: "Bahrain COVID Stats"
 output:
   distill::distill_article:
     self_contained: false
+bibliography: 
+- packages.bib
+biblio-style: authoryear-comp
 ---
 
 ```{r ,include=FALSE}
@@ -356,5 +359,13 @@ covid_graph_2021
 ```
 
 
+# Referencing
 
+@R-tidyverse
+@R-dplyr
+@R-plotly
+@R-knitr
+@R-kableExtra
+@R-here
+@R-ggplot2
 
