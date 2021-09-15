@@ -127,8 +127,9 @@ The table **3** above tells us that:
 
 *  **28th june,2021** recorded maximum nnumber of vaccination done across the country.
 
+# Data Story 1 
 
-# Data Story 1 (Wihthin Continent)
+This data story focus on the covid cases and deaths that occured due to it in **Bahrain**, with respect to the continent it is in which is **Asia**.
 
 ```{r read3,include=FALSE}
 covid_asia_loc <- covid_asia %>% 
@@ -150,10 +151,12 @@ covid_asia %>%
   geom_label(aes(label = total_cases)) +
   theme(legend.position = "none")
 ```
+The above plot **1** , showcases the top **5** countries in **Asia** with covid cases and then compare them to the cases in **Bahrain**.
 
+* **India** topped with maximum cases.
+* Suprisingly **China** doesn't show up in this stats even being the world's populous country.( refer [here](https://covid19.who.int/region/wpro/country/cn))
 
 ```{r plt1}
-
 graph1 <- covid_asia %>% 
   filter(location == "Bahrain" | location %in% covid_asia_loc1) %>% 
   separate(date, into = c("Year","Month","Day")) %>% 
@@ -174,6 +177,13 @@ graph1 <- covid_asia %>%
   facet_wrap(~Year) 
 ggplotly(graph1)
 ```
+
+The above plot highlights on the trend of covid cases per year in top **5** countries found above and compare them to **Bahrain**. Following insights can be taken out from above plot:
+
+*  In 2020, **Bahrain** was pretty much chilled out with monthly cases to as low if compared to others,
+*  Whereas other countries apart from **India**, also saw similar trend, but a slight rise was see in **November**.
+*  In **2021**, **Bahrain** still showed the same trend, whereas variations were seen in other countries.
+*  **Turkey** went to its peak cases in **April,2021** and then plunged to bottom and remain constant for a couple of months.
 
 ```{r}
 graph2 <- covid_asia %>% 
@@ -197,6 +207,15 @@ graph2 <- covid_asia %>%
 ggplotly(graph2)
 ```
 
+The above plot highlights on the trend of deaths due to covid per year in top **5** countries found above and compare them to **Bahrain**. Following points can be depicted:
+
+* **Bahrain** shows the similar trend as to with covid cases found in **plot 2**.
+*  In **2020**, **Iran** saw a spike in deaths in **November**, kind of predictable as the cases to increased in this month.
+*  In **2021**, deaths in **Turkey** was again in line with the month in which mmximum covid cases were recorded for it.
+*  In **2021**,**Indonesia** came out of a surprise, even though the cases decreased in **August** but the death toll jumped up.
+
+
+You can check out on deeper insight on how Idia went through Covid [here](https://etc5523-2021.github.io/blog-kgar0017/post1.html)
 
 # Data Story 2(Betwee continents)
 
