@@ -26,10 +26,13 @@ knitr::opts_chunk$set(
 options(scipen = 1e6)
 ```
 ```{css ,echo = FALSE}
+body{
+  background-color: yellow;
+  }
 
 h1{
   color: red;
-  font-size: 50px;
+  font-size: 40px;
 }
 
 h2{
@@ -44,6 +47,20 @@ thead {
 
 
 ```
+
+# Data Description
+
+The Blog is using the data collected by [ourworldindata.org](https://ourworldindata.org/coronavirus-source-data) and stored and updated timely in their github repo [here](https://github.com/owid/covid-19-data/tree/master/public/data). The team of **"Our World in Data"** has further collected this data from various sources such as:
+
+* **Confirmed Cases**: This data comes from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19) (JHU).
+*  **Hospitalizations and intensive care unit (ICU) admissions**: Our data comes from the [European Centre for Disease Prevention and Control](https://www.ecdc.europa.eu/en/publications-data/download-data-hospital-and-icu-admission-rates-and-current-occupancy-covid-19) (ECDC) for a select number of European countries; and government sources for the [United Kingdom](https://coronavirus.data.gov.uk/details/healthcare), the [United States](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries), [Canada](https://covid19tracker.ca), [Israel](https://datadashboard.health.gov.il/COVID-19/general), [Algeria](https://github.com/yasserkaddour/covid19-icu-data-algeria), and [Switzerland](https://opendata.swiss/fr/dataset/covid-19-schweiz).
+*  **Testing for COVID-19**: This data is collected by the **Our World in Data team** from official reports; you can find further details in our post on COVID-19 testing, including our [checklist of questions to understand testing data](https://ourworldindata.org/coronavirus-testing#our-checklist-for-covid-19-testing-data), information on [geographical and temporal coverage](https://ourworldindata.org/coronavirus-testing#which-countries-do-we-have-testing-data-for), and [detailed country-by-country source information](https://ourworldindata.org/coronavirus-testing#our-checklist-for-covid-19-testing-data). The testing dataset is updated around **twice a week**.
+*  **Vaccinations against COVID-19**: This data is collected by the **Our World in Data team** from official reports.
+*  **Other variables**: This data is collected from a variety of sources (United Nations, World Bank, Global Burden of Disease, Blavatnik School of Government, etc.). More information is available in the [codebook](https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv).
+
+
+The data is available in **csv**, **xlsx**, and **json** format. I will be working on **csv** format for this blog post.
+
 
 ```{r read,include=FALSE}
 covid <- read_csv(here::here("data/bahrain-covid-data.csv"))
@@ -68,9 +85,11 @@ covid_asia <- covid %>%
 
 The main dataset is of dimensions **`r dim(covid)`**, whereas that of **India** alone is **`r dim(covid_bahrain)`**.
 
+**NOTE**: The data is upto date **`r covid_bahrain %>% tail(1) %>% select(date)`**.
+
 # Analysis & Findings
 
-## What are the top 5 days with maximum covid cases reported
+## What are the top 5 days when maximum covid cases reported
 
 ```{r Q1A,echo=FALSE}
 covid_bahrain_1 %>% 
@@ -101,12 +120,12 @@ covid_bahrain_1 %>%
   kable_styling(bootstrap_options = c("basic","striped,hover"))
 ```
 
-The table **1** & **2** above tells us that:
+The tables **1** & **2** above tell us that:
 
 *  **29th May,2021** reported maximum new covid cases.
 *  **11th March,2020** had a more percentage of new cases reported w.r.t new tests done.
 
-## What are top 5 days with maximum covid vaccinations done ?
+## What are top 5 days when maximum covid vaccinations done ?
 
 ```{r}
 covid_bahrain_1 %>% 
@@ -132,7 +151,7 @@ The table **3** above tells us that:
 
 # Data Story 1 
 
-This data story focus on the covid cases and deaths that occurred due to it in **Bahrain**, with respect to the continent it is in which is **Asia**.
+This data story focuses on the covid cases and deaths that occurred due to it in **Bahrain**, with respect to the continent it is in which is **Asia**.
 
 ```{r read3,include=FALSE}
 covid_asia_loc <- covid_asia %>% 
@@ -154,10 +173,10 @@ covid_asia %>%
   geom_label(aes(label = total_cases)) +
   theme(legend.position = "none")
 ```
-The above plot **1** , showcases the top **5** countries in **Asia** with covid cases and then compare them to the cases in **Bahrain**.
+The above plot **1** , showcases the top **5** countries in **Asia** with covid cases and then compares them to the cases in **Bahrain**.
 
-* **India** topped with maximum cases.
-* Surprisingly **China** doesn't show up in this stats even being the world's populous country.( refer [here](https://covid19.who.int/region/wpro/country/cn))
+* **India** topped with the maximum cases.
+* Surprisingly **China** doesn't show up in these stats even being the world's populous country.( refer [here](https://covid19.who.int/region/wpro/country/cn))
 
 ```{r plt1}
 graph1 <- covid_asia %>% 
@@ -186,7 +205,7 @@ The above plot highlights on the trend of covid cases per year in top **5** coun
 *  In 2020, **Bahrain** was pretty much chilled out with monthly cases to as low if compared to others,
 *  Whereas other countries apart from **India**, also saw similar trend, but a slight rise was see in **November**.
 *  In **2021**, **Bahrain** still showed the same trend, whereas variations were seen in other countries.
-*  **Turkey** went to its peak cases in **April,2021** and then plunged to bottom and remain constant for a couple of months.
+*  **Turkey** went to its peak cases in **April,2021** and then plunged to bottom and remained constant for a couple of months.
 
 ```{r}
 graph2 <- covid_asia %>% 
@@ -222,7 +241,7 @@ You can check out on deeper insight on how India went through Covid [here](https
 
 # Data Story 2
 
-This data story focus on the covid cases and deaths that occurred due to it in **Bahrain**, with respect to country with maximum cases in each continent.
+This data story focuses on the covid cases and deaths that occurred due to it in **Bahrain**, with respect to country with maximum cases in each continent.
 
 ```{r read4,include=FALSE}
 covid_cont_loc <- covid %>% 
@@ -246,7 +265,7 @@ covid %>%
   geom_label(aes(label = total_cases)) +
   theme(legend.position = "none")
 ```
-The above plot showcase the countries with maximum covid cases in each continent and compare them to **Bahrain**.
+The above plot showcase the countries with maximum covid cases in each continent and compares them to **Bahrain**.
 
 *  Surprisingly, **United States** recorded more cases than **India** even being less populated.
 *  **Bahrain**, this time when compared across continents turned out to have shift its place from least cases recorded to second least with **Australia** recording the least Covid cases across the continent wise comparison.
@@ -275,7 +294,7 @@ ggplotly(graph3)
 
 The above plot showcases the trend of monthly covid cases recorded across the countries with max. case till date in each continent. Following points can be deduced from the above:
 
-*  Bahrain as showed the same trend for both years as mentioned above, but it recorded least cases only in **March,2021**.
+*  Bahrain showed the same trend for both years as mentioned inn **Data Stor 1**, but it recorded least cases only in **March,2021**.
 *  After **March,2021**, it Australia who took the seat of having the least cases and remained constant till **June,2021**,
 * It is only after **June,2021**, when an outbreak happened in Australia, cases shoot up and Bahrain was back to the least recorded for the following months.
 *  **India** and **US** were pretty much neck-to-neck in cases recorded upto **October,2020**, after that cases in US saw whopping jump and remained same for **3 months**. Soon after **January,2021**, fall in cases recorded was observed and on other hand, India went to its peak of covid cases recorded in **May,2021**. 
